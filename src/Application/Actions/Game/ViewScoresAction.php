@@ -14,7 +14,6 @@ class ViewScoresAction extends GameAction
     {
         $gameId = (int) $this->resolveArg('id');
         $scores = $this->db->getScoresByGameId($gameId);
-
         $this->logger->info("Scores for game `${gameId}` was viewed.");
 
         return $this->respondWithData($scores);

@@ -1,8 +1,6 @@
 <?php
 declare(strict_types=1);
 
-use App\Application\Actions\User\ListUsersAction;
-use App\Application\Actions\User\ViewUserAction;
 use App\Application\Actions\Game\ListGamesAction;
 use App\Application\Actions\Game\ViewGameAction;
 use App\Application\Actions\Game\ViewScoresAction;
@@ -34,10 +32,5 @@ return function (App $app) {
 
     $app->group('/add', function(Group $group) {
         $group->post('', PostScoreAction::class);
-    });
-
-    $app->group('/users', function (Group $group) {
-        $group->get('', ListUsersAction::class);
-        $group->get('/{id}', ViewUserAction::class);
     });
 };

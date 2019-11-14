@@ -13,9 +13,8 @@ class ListGamesAction extends GameAction
     protected function action(): Response
     {
         $games = $this->db->getAllGames();
-
         $this->logger->info("Games list was viewed.");
-
+        
         return $this->respondWithData($games);
     }
 }

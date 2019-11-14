@@ -14,9 +14,8 @@ class ViewGameAction extends GameAction
     {
         $gameId = (int) $this->resolveArg('id');
         $game = $this->db->getGameById($gameId);
-
         $this->logger->info("Game of id `${gameId}` was viewed.");
-
+        
         return $this->respondWithData($game);
     }
 }

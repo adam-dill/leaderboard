@@ -16,6 +16,7 @@ class PostScoreAction extends GameAction
         $obj = json_decode($body);
         $result = $this->db->postScore($obj);
         $this->logger->info("posting score. ");
+        
         return $this->respondWithData($result);
     }
 }

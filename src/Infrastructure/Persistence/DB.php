@@ -19,8 +19,14 @@ class DB
         $query = 'SELECT * FROM games';
         $stm = $this->pdo->prepare($query);
         $stm->execute();
-        $rows = $stm->fetchAll();
-        return $rows;
+        $returnValue = array();
+        while($row = $stm->fetch()) {
+            $game = new GameResult();
+            $game->populate($row);
+            array_push($returnValue, $game);
+        }
+
+        return $returnValue;
     }
 
     public function getGameById($id) {
@@ -29,7 +35,10 @@ class DB
         $stm->bindParam(":id", $id);
         $stm->execute();
         $row = $stm->fetch();
-        return $row;
+        $returnValue = new GameResult();
+        $returnValue->populate($row);
+
+        return $returnValue;
     }
 
     public function getScoresByGameId($id) {
@@ -56,6 +65,7 @@ class DB
         if (isset($queue)) {
             array_push($returnValue, $queue);
         }
+
         return $returnValue;
     }
 
@@ -76,5 +86,4 @@ class DB
             $stmt->execute();
         }
     }
-
 }

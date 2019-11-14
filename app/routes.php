@@ -14,8 +14,13 @@ use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 return function (App $app) {
     $app->get('/', function (Request $request, Response $response) {
-        $response->getBody()->write('Use /games, /games/{id}, /scores/{id}.');
-        return $response;
+        $file = '../public/landing.html';
+        if (file_exists($file)) {
+            $response->getBody()->write(file_get_contents($file));
+            return $response;
+        } else {
+            throw new \Slim\Exception\NotFoundException($request, $response);
+        }
     });
 
     $app->group('/games', function (Group $group) {

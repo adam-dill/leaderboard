@@ -5,7 +5,7 @@ namespace App\Application\Actions\Game;
 
 use Psr\Http\Message\ResponseInterface as Response;
 
-class PostScoreAction extends GameAction
+class AddGameAction extends GameAction
 {
     /**
      * {@inheritdoc}
@@ -14,8 +14,8 @@ class PostScoreAction extends GameAction
     {
         $body = $this->request->getBody()->getContents();
         $obj = json_decode($body);
-        $result = $this->db->postScore($obj);
-        $this->logger->info("posting score.");
+        $result = $this->db->addGame($obj);
+        $this->logger->info("adding a game.");
         
         return $this->respondWithData($result);
     }

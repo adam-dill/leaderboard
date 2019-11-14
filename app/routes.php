@@ -5,6 +5,7 @@ use App\Application\Actions\Game\ListGamesAction;
 use App\Application\Actions\Game\ViewGameAction;
 use App\Application\Actions\Game\ViewScoresAction;
 use App\Application\Actions\Game\PostScoreAction;
+use App\Application\Actions\Game\AddGameAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
@@ -23,6 +24,7 @@ return function (App $app) {
 
     $app->group('/games', function (Group $group) {
         $group->get('', ListGamesAction::class);
+        $group->post('/add', AddGameAction::class);
         $group->get('/{id}', ViewGameAction::class);
     });
 

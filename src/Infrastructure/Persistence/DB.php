@@ -35,8 +35,26 @@ class DB
         $stm->bindParam(":id", $id);
         $stm->execute();
         $row = $stm->fetch();
-        $returnValue = new GameResult();
-        $returnValue->populate($row);
+        $returnValue = null;
+        if ($row) {
+            $returnValue = new GameResult();
+            $returnValue->populate($row);
+        }
+
+        return $returnValue;
+    }
+
+    public function getGameByName($name) {
+        $query = "SELECT * FROM games WHERE name LIKE :name";
+        $stm = $this->pdo->prepare($query);
+        $stm->bindParam(":name", $name);
+        $stm->execute();
+        $row = $stm->fetch();
+        $returnValue = null;
+        if ($row) {
+            $returnValue = new GameResult();
+            $returnValue->populate($row);
+        }
 
         return $returnValue;
     }
@@ -85,5 +103,18 @@ class DB
             $stmt->bindParam(':value', $value);
             $stmt->execute();
         }
+    }
+
+    public function addGame($data) {
+        $game = $this->getGameByName($data->name);
+        if ($game) {
+            return $game;
+        }
+        $query = "INSERT INTO games (name) VALUES (:name)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':name', $data->name);
+        $stmt->execute();
+
+        return $this->getGameByName($data->name);
     }
 }

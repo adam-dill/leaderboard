@@ -29,10 +29,7 @@ return function (App $app) {
     });
 
     $app->group('/scores', function (Group $group) {
+        $group->post('/add', PostScoreAction::class);
         $group->get('/{id}', ViewScoresAction::class);
-    });
-
-    $app->group('/add', function(Group $group) {
-        $group->post('', PostScoreAction::class);
     });
 };

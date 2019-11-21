@@ -1,6 +1,6 @@
 @font-face {
     font-family: titleFont;
-    src: url('./assets/Lightdot-13x9.ttf');
+    src: url('./assets/Nightmare Codehack.otf');
 }
 
 body {
@@ -18,9 +18,9 @@ header {
 header h1 {
     display:inline-block;
     font-family: titleFont;
-    font-size: 34pt;
+    font-size: 50pt;
     color: DeepPink;
-    margin:10px;
+    margin:0px 0px -20px 10px;
     padding:0px;
 }
 

@@ -15,10 +15,10 @@ return function (ContainerBuilder $containerBuilder) {
                 'level' => Logger::DEBUG,
             ],
             'dbconnection' => [
-                'host'   => "leaderboards.games.adamdill.com",
-                'dbname' => "adamdill_leaderboards",
-                'user'   => "adill",
-                'pass'   => "iceCreampie_76",
+                'host'   => "HOST",
+                'dbname' => "DB_NAME",
+                'user'   => "USERNAME",
+                'pass'   => "PASSWORD",
             ],
         ],
     ]);

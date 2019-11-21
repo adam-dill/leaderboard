@@ -21,14 +21,6 @@ if (false) { // Should be set to true in production
 $settings = require __DIR__ . '/../app/settings.php';
 $settings($containerBuilder);
 
-/*
-$db_host = "leaderboards.games.adamdill.com";
-$db_name = "adamdill_leaderboards";
-$db_user = "adill";
-$db_pass = "iceCreampie_76";
-$dbh = new PDO('mysql:host='.$db_host.';dbname='.$db_name.'', $db_user, $db_pass);
-*/
-
 // Set up dependencies
 $dependencies = require __DIR__ . '/../app/dependencies.php';
 $dependencies($containerBuilder);

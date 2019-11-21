@@ -1,0 +1,79 @@
+@font-face {
+    font-family: titleFont;
+    src: url('./assets/Lightdot-13x9.ttf');
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+header {
+    display:flex;
+    align-items: baseline;
+    background-color: lightpink;
+    border-bottom: 3px solid DeepPink;
+}
+
+header h1 {
+    display:inline-block;
+    font-family: titleFont;
+    font-size: 34pt;
+    color: DeepPink;
+    margin:10px;
+    padding:0px;
+}
+
+header h1 a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+nav ul {
+    display:inline-block;
+    list-style: none;
+    margin:0px 0px 0px 25px;
+    padding:0px;
+}
+
+nav li {
+    display: inline-block;
+    
+}
+
+nav li a {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display:block;
+    padding: 5px 10px;
+    color: MediumVioletRed;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    background-color: DeepPink;
+    color:white;
+}
+
+.game-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin:0px;
+    padding:0px;
+}
+
+.game-list-container li {
+    padding: 10px 25px;
+    background-color: plum;
+    margin: 1px;
+    cursor: pointer;
+    color: darkviolet;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+}
+
+.game-list-container li.selected {
+    background-color: darkviolet;
+    color: white;
+}

@@ -13,7 +13,7 @@ use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 return function (App $app) {
     $app->get('/', function (Request $request, Response $response) {
-        $file = '../public/landing.html';
+        $file = '../public/index.html';
         if (file_exists($file)) {
             $response->getBody()->write(file_get_contents($file));
             return $response;

@@ -12,9 +12,9 @@ class ViewGameAction extends GameAction
      */
     protected function action(): Response
     {
-        $gameId = (int) $this->resolveArg('id');
-        $game = $this->db->getGame($gameId);
-        $this->logger->info("Game of id `${gameId}` was viewed.");
+        $arg = $this->resolveArg('id');
+        $game = $this->db->getGame($arg);
+        $this->logger->info("Game of arg `${arg}` was viewed.");
         
         return $this->respondWithData($game);
     }

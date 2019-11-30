@@ -29,49 +29,11 @@ class DB
         return $returnValue;
     }
 
-    public function getGameById($id) {
-        $query = "SELECT * FROM games WHERE id=:id";
-        $stm = $this->pdo->prepare($query);
-        $stm->bindParam(":id", $id);
-        $stm->execute();
-        $row = $stm->fetch();
-        $returnValue = null;
-        if ($row) {
-            $returnValue = new GameResult();
-            $returnValue->populate($row);
-        }
-
-        return $returnValue;
-    }
-
-    public function getGameByName($name) {
-        $query = "SELECT * FROM games WHERE name LIKE :name";
-        $stm = $this->pdo->prepare($query);
-        $stm->bindParam(":name", $name);
-        $stm->execute();
-        $row = $stm->fetch();
-        $returnValue = null;
-        if ($row) {
-            $returnValue = new GameResult();
-            $returnValue->populate($row);
-        }
-
-        return $returnValue;
-    }
-
-    public function getGameBySlug($slug) {
-        $query = "SELECT * FROM games WHERE slug LIKE :slug";
-        $stm = $this->pdo->prepare($query);
-        $stm->bindParam(":slug", $slug);
-        $stm->execute();
-        $row = $stm->fetch();
-        $returnValue = null;
-        if ($row) {
-            $returnValue = new GameResult();
-            $returnValue->populate($row);
-        }
-
-        return $returnValue;
+    public function getGame($arg) {
+        $game = $this->getGameById($arg);
+        if ($game == null) { $game = $this->getGameBySlug($arg); }
+        if ($game == null) { $game = $this->getGameByName($arg); }
+        return $game;
     }
 
     public function getScoresByGameId($id) {
@@ -134,6 +96,59 @@ class DB
         $stmt->execute();
 
         return $this->getGameByName($data->name);
+    }
+
+
+    //
+    //
+    //  PRIVATE METHODS
+    //
+    //
+
+
+    private function getGameById($id) {
+        $query = "SELECT * FROM games WHERE id=:id";
+        $stm = $this->pdo->prepare($query);
+        $stm->bindParam(":id", $id);
+        $stm->execute();
+        $row = $stm->fetch();
+        $returnValue = null;
+        if ($row) {
+            $returnValue = new GameResult();
+            $returnValue->populate($row);
+        }
+
+        return $returnValue;
+    }
+
+    private function getGameByName($name) {
+        $query = "SELECT * FROM games WHERE name LIKE :name";
+        $stm = $this->pdo->prepare($query);
+        $stm->bindParam(":name", $name);
+        $stm->execute();
+        $row = $stm->fetch();
+        $returnValue = null;
+        if ($row) {
+            $returnValue = new GameResult();
+            $returnValue->populate($row);
+        }
+
+        return $returnValue;
+    }
+
+    private function getGameBySlug($slug) {
+        $query = "SELECT * FROM games WHERE slug LIKE :slug";
+        $stm = $this->pdo->prepare($query);
+        $stm->bindParam(":slug", $slug);
+        $stm->execute();
+        $row = $stm->fetch();
+        $returnValue = null;
+        if ($row) {
+            $returnValue = new GameResult();
+            $returnValue->populate($row);
+        }
+
+        return $returnValue;
     }
 
     private function createSlugFromName($name) {

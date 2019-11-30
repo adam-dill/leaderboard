@@ -10,10 +10,10 @@ class ScoreResult {
     public $scores = array();
 
     public function populate($row) {
-        $this->id = $row['id'];
-        $this->game_id = $row['game_id'];
-        $this->player_name = $row['player_name'];
-        $this->timestamp = $row['timestamp'];
+        $this->id                       = $row['id'];
+        $this->game_id                  = $row['game_id'];
+        $this->player_name              = $row['player_name'];
+        $this->timestamp                = $row['timestamp'];
         $this->scores[$row['property']] = $row['value'];
     }
 }

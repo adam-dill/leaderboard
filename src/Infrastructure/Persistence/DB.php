@@ -59,6 +59,21 @@ class DB
         return $returnValue;
     }
 
+    public function getGameBySlug($slug) {
+        $query = "SELECT * FROM games WHERE slug LIKE :slug";
+        $stm = $this->pdo->prepare($query);
+        $stm->bindParam(":slug", $slug);
+        $stm->execute();
+        $row = $stm->fetch();
+        $returnValue = null;
+        if ($row) {
+            $returnValue = new GameResult();
+            $returnValue->populate($row);
+        }
+
+        return $returnValue;
+    }
+
     public function getScoresByGameId($id) {
         $query = 'SELECT e.id, e.game_id, e.player_name,  e.timestamp, s.property, s.value
                     FROM entries e
@@ -106,15 +121,24 @@ class DB
     }
 
     public function addGame($data) {
-        $game = $this->getGameByName($data->name);
+        $slug = $this->createSlugFromName($data->name);
+        $game = $this->getGameBySlug($data->name);
         if ($game) {
             return $game;
         }
-        $query = "INSERT INTO games (name) VALUES (:name)";
+        
+        $query = "INSERT INTO games (name, slug) VALUES (:name, :slug)";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':name', $data->name);
+        $stmt->bindParam(':slug', $slug);
         $stmt->execute();
 
         return $this->getGameByName($data->name);
+    }
+
+    private function createSlugFromName($name) {
+        $name = strtolower($name);
+        $name = str_replace(' ', '-', $name);
+        return preg_replace('/[^A-Za-z0-9\-]/', '', $name);
     }
 }

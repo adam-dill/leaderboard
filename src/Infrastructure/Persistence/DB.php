@@ -84,7 +84,7 @@ class DB
 
     public function addGame($data) {
         $slug = $this->createSlugFromName($data->name);
-        $game = $this->getGameBySlug($data->name);
+        $game = $this->getGameBySlug($slug);
         if ($game) {
             return $game;
         }
